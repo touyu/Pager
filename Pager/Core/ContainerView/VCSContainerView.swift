@@ -132,7 +132,6 @@ extension VCSContainerView: UICollectionViewDelegate, UICollectionViewDelegateFl
         if !programmaticallyScrolling {
             let changeCurrentIndex = newCurrentIndex != oldCurrentIndex
             let (fromIndex, toIndex, scrollPercentage) = progressiveIndicatorData(newCurrentIndex)
-            print(fromIndex, toIndex, scrollPercentage)
             delegate?.moveTo(fromIndex: fromIndex, toIndex: toIndex, scrollPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
         }
         lastContentOffsetX = scrollView.contentOffset.x
@@ -154,6 +153,7 @@ extension VCSContainerView: UICollectionViewDelegate, UICollectionViewDelegateFl
         var fromIndex = currentIndex
         var toIndex = currentIndex
         let direction = swipeDirection
+        var percentage = scrollPercentage
         
         if direction == .left {
             if virtualPage > count - 1 {
@@ -165,6 +165,12 @@ extension VCSContainerView: UICollectionViewDelegate, UICollectionViewDelegateFl
                 } else {
                     toIndex = fromIndex + 1
                 }
+                
+                if toIndex == count {
+                    percentage += 1
+                    fromIndex -= 1
+                    toIndex -= 1
+                }
             }
         } else if direction == .right {
             if virtualPage < 0 {
@@ -172,13 +178,19 @@ extension VCSContainerView: UICollectionViewDelegate, UICollectionViewDelegateFl
                 toIndex = -1
             } else {
                 if self.scrollPercentage > 0.5 {
-                    fromIndex = min(toIndex + 1, count - 1)
+                    fromIndex = min(toIndex + 1, count)
                 } else {
                     toIndex = fromIndex - 1
+                }
+                
+                if fromIndex == count {
+                    percentage -= 1
+                    fromIndex -= 1
+                    toIndex -= 1
                 }
             }
         }
         
-        return (fromIndex, toIndex, scrollPercentage)
+        return (fromIndex, toIndex, percentage)
     }
 }

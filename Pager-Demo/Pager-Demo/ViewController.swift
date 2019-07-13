@@ -27,9 +27,12 @@ final class ViewController: UIViewController, Pager {
         vc2.view.backgroundColor = .blue
         vc2.title = "Child2"
         let vc3 = storyboard!.instantiateViewController(withIdentifier: "ChildViewController")
-        vc3.view.backgroundColor = .red
+        vc3.view.backgroundColor = .yellow
         vc3.title = "Child3"
-        return [vc1, vc2, vc3]
+        let vc4 = storyboard!.instantiateViewController(withIdentifier: "ChildViewController")
+        vc4.view.backgroundColor = .green
+        vc4.title = "Child4"
+        return [vc1, vc2, vc3, vc4]
     }
     
     func menuProvider() -> MenuProvider? {
