@@ -15,7 +15,6 @@ final class PinterestMenuViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        contentView.backgroundColor = .clear
     }
     
     func configure(title: String) {

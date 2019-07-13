@@ -20,16 +20,17 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     public var selectedTextColor = UIColor.black
     public var deselectedTextColor = UIColor.lightGray
+    public var titleFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+    public var selectedViewInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+    public var selectedViewColor = UIColor(white: 0.9, alpha: 1) {
+        didSet {
+            selectedView.backgroundColor = selectedViewColor
+        }
+    }
     
     private(set) public var currentIndex: Int = 0
     private var titles: [String] = []
-    private var selectedView: UIView = {
-        let v = UIView()
-        v.bounds.size = CGSize(width: 100, height: 30)
-        v.layer.cornerRadius = v.bounds.height / 2
-        v.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        return v
-    }()
+    private var selectedView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,6 +58,8 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         
         selectedView.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         insertSubview(selectedView, at: 0)
+        
+        selectedView.backgroundColor = selectedViewColor
     }
     
     public func moveTo(fromIndex: Int, toIndex: Int, scrollPercentage: CGFloat, indexWasChanged: Bool) {
@@ -109,7 +112,8 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     private func updateSelectedView() {
         guard let cell = collectionView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? PinterestMenuViewCell else { return }
         let point = cell.contentView.convert(cell.titleLabel.center, to: collectionView)
-        selectedView.frame.size = CGSize(width: cell.titleLabel.bounds.width + 40, height: cell.titleLabel.bounds.height + 16)
+        selectedView.frame.size = CGSize(width: cell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right,
+                                         height: cell.titleLabel.bounds.height + selectedViewInsets.top + selectedViewInsets.bottom)
         selectedView.center = point
         selectedView.layer.cornerRadius = selectedView.bounds.height / 2
     }
@@ -124,6 +128,7 @@ extension PinterestMenuView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(type: PinterestMenuViewCell.self, for: indexPath)
         cell.configure(title: titles[indexPath.item])
         cell.titleLabel.textColor = currentIndex == indexPath.item ? selectedTextColor : deselectedTextColor
+        cell.titleLabel.font = titleFont
         return cell
     }
 }
