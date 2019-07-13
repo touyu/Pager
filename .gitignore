@@ -1,0 +1,9 @@
+# xcode
+*.xcuserstate
+*.xcuserdata
+*.xcuserdatad
+
+# others
+*.swp
+!.gitkeep
+.DS_Store
