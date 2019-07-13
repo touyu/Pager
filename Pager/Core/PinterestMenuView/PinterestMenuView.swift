@@ -73,9 +73,13 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         guard let toCell = collectionView.cellForItem(at: IndexPath(item: toIndex, section: 0)) as? PinterestMenuViewCell else { return }
         let fromPoint = fromCell.contentView.convert(fromCell.titleLabel.center, to: collectionView)
         let toPoint = toCell.contentView.convert(toCell.titleLabel.center, to: collectionView)
-        
         let pointX = (toPoint.x - fromPoint.x) * scrollPercentage + fromPoint.x
         selectedView.center.x = pointX
+        
+        let fromWidth = fromCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        let toWidth = toCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
+        selectedView.frame.size.width = width
     }
     
     public func sourceViewControllers(_ viewControllers: [UIViewController]) {
@@ -99,12 +103,18 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         let toPoint = toCell.contentView.convert(toCell.titleLabel.center, to: collectionView)
         selectedView.center.x = fromPoint.x
         
+        let fromWidth = fromCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        let toWidth = toCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        selectedView.frame.size.width = fromWidth
+        
         if !animated {
+            selectedView.frame.size.width = toWidth
             selectedView.center.x = toPoint.x
             return
         }
         
         UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.selectedView.frame.size.width = toWidth
             self?.selectedView.center.x = toPoint.x
         }
     }
