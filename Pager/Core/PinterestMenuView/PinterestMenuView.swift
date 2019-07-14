@@ -60,7 +60,6 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
         }
-//        collectionView.isScrollEnabled = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(PinterestMenuViewCell.self)
@@ -77,6 +76,19 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
             currentIndex = toIndex
             collectionView.reloadData()
             collectionView.layoutIfNeeded()
+        }
+        
+        // Scroll
+        let totalWidth = collectionView.contentSize.width
+        let diff = totalWidth - collectionView.bounds.width
+        
+        if diff > 0 {
+            let fromValue = diff / CGFloat(titles.count-1)  * CGFloat(fromIndex)
+            let toValue = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
+            let value = (toValue - fromValue) * scrollPercentage + fromValue
+            var offset = collectionView.contentOffset
+            offset.x = value
+            collectionView.setContentOffset(offset, animated: false)
         }
         
         guard let fromAttributes = getAttributes(index: fromIndex),
