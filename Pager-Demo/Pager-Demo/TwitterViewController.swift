@@ -17,9 +17,9 @@ final class TwitterViewController: UIViewController, Pager {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        menuView.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-//        menuView.distribution = .equalSpacing
-//        menuView.selectedBarWidthMode = .fillEqually
+        menuView.distribution = .equalSpacing
+        menuView.alignment = .center
+        menuView.selectedBarWidthMode = .automatic
 
         preparePager()
     }
@@ -39,5 +39,9 @@ final class TwitterViewController: UIViewController, Pager {
     
     func menuProvider() -> MenuProvider? {
         return menuView
+    }
+    
+    @IBAction func tappedCloseButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }

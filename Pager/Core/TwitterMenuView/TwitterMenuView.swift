@@ -16,12 +16,17 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     
     public enum SelectedBarWidthMode {
         case automatic
-        case equally
         case fillEqually
         case fixed(width: CGFloat)
     }
     
+    public enum Alignment {
+        case left
+        case center
+    }
+    
     public var distribution: Distribution = .fillEqually
+    public var alignment: Alignment = .left
     public var insets: UIEdgeInsets = .zero
     public var itemSpacing: CGFloat = 32
     public var titleFont: UIFont = UIFont.boldSystemFont(ofSize: 14)
@@ -31,6 +36,7 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     public var selectedBarHeight: CGFloat = 2
     public var selectedBarInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     public var selectedBarWidthMode: SelectedBarWidthMode = .automatic
+    public var shouldFillAvailiableWidth = false
     
     public weak var delegate: MenuProviderDelegate?
     private(set) public var currentIndex: Int = 0
@@ -95,18 +101,20 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     
         switch selectedBarWidthMode {
         case .automatic:
-            let inset = selectedBarInsets.left + selectedBarInsets.right
-            let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
-            let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
-            let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
-            selectedBar.frame.size.width = width
-        case .equally:
-            let count = collectionView.numberOfItems(inSection: 0)
-            let totalItemSpacing = itemSpacing * CGFloat(count-1)
-            let totalItemWidth = collectionView.contentSize.width
-                - (insets.left + insets.right)
-                - totalItemSpacing
-            selectedBar.frame.size.width = totalItemWidth / CGFloat(count)
+            switch alignment {
+            case .left:
+                let inset = selectedBarInsets.left + selectedBarInsets.right
+                let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+                let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+                let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
+                selectedBar.frame.size.width = width
+            case .center:
+                let inset = itemSpacing
+                let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+                let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+                let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
+                selectedBar.frame.size.width = width
+            }
         case .fillEqually:
             let count = collectionView.numberOfItems(inSection: 0)
             let width = collectionView.bounds.width / CGFloat(count)
@@ -121,8 +129,19 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
             .compactMap { $0 as? MenuTitleProvider }
             .map { $0.menuTitle }
         
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
+        switch alignment {
+        case .left:
+            break
+        case .center:
+            itemSpacing = 0
+            insets = .zero
+            
+            collectionView.reloadData()
+            collectionView.layoutIfNeeded()
+            let spacing = (collectionView.bounds.width - collectionView.contentSize.width) / CGFloat(titles.count)
+            itemSpacing = spacing
+            insets = UIEdgeInsets(top: 0, left: spacing / 2, bottom: 0, right: spacing / 2)
+        }
         
         updateSelectedBar()
     }
@@ -151,18 +170,20 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         
         switch selectedBarWidthMode {
         case .automatic:
-            let inset = selectedBarInsets.left + selectedBarInsets.right
-            let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
-            let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
-            selectedBar.frame.size.width = fromWidth
-            updateSelectedBarWidth(toWidth, centerX: toPoint.x, animated: animated)
-        case .equally:
-            let count = collectionView.numberOfItems(inSection: 0)
-            let totalItemSpacing = itemSpacing * CGFloat(count-1)
-            let totalItemWidth = collectionView.contentSize.width
-                - (insets.left + insets.right)
-                - totalItemSpacing
-            selectedBar.frame.size.width = totalItemWidth / CGFloat(count)
+            switch alignment {
+            case .left:
+                let inset = selectedBarInsets.left + selectedBarInsets.right
+                let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+                let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+                selectedBar.frame.size.width = fromWidth
+                updateSelectedBarWidth(toWidth, centerX: toPoint.x, animated: animated)
+            case .center:
+                let inset = itemSpacing
+                let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+                let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+                selectedBar.frame.size.width = fromWidth
+                updateSelectedBarWidth(toWidth, centerX: toPoint.x, animated: animated)
+            }
         case .fillEqually:
             let count = collectionView.numberOfItems(inSection: 0)
             let width = collectionView.bounds.width / CGFloat(count)
@@ -187,18 +208,21 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     }
     
     private func updateSelectedBar() {
+        collectionView.reloadData()
+        collectionView.layoutIfNeeded()
+        
         switch selectedBarWidthMode {
         case .automatic:
-            let inset = selectedBarInsets.left + selectedBarInsets.right
-            let width = titleLabelSize(string: titles[currentIndex]).width + inset
-            selectedBar.frame.size = CGSize(width: width, height: selectedBarHeight)
-        case .equally:
-            let count = collectionView.numberOfItems(inSection: 0)
-            let totalItemSpacing = itemSpacing * CGFloat(count-1)
-            let totalItemWidth = collectionView.contentSize.width
-                - (insets.left + insets.right)
-                - totalItemSpacing
-            selectedBar.frame.size = CGSize(width: totalItemWidth / CGFloat(count), height: selectedBarHeight)
+            switch alignment {
+            case .left:
+                let inset = selectedBarInsets.left + selectedBarInsets.right
+                let width = titleLabelSize(string: titles[currentIndex]).width + inset
+                selectedBar.frame.size = CGSize(width: width, height: selectedBarHeight)
+            case .center:
+                let inset = itemSpacing
+                let width = titleLabelSize(string: titles[currentIndex]).width + inset
+                selectedBar.frame.size = CGSize(width: width, height: selectedBarHeight)
+            }
         case .fillEqually:
             let count = collectionView.numberOfItems(inSection: 0)
             let width = collectionView.bounds.width / CGFloat(count)
