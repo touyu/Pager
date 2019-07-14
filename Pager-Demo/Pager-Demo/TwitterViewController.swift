@@ -25,10 +25,10 @@ final class TwitterViewController: UIViewController, Pager {
     }
     
     func viewControllers(for: PagerViewController) -> [UIViewController] {
-        return [(UIColor.red, "ツイート"),
-                (UIColor.blue, "ツイートと返信"),
-                (UIColor.yellow, "メディア"),
-                (UIColor.orange, "いいね")]
+        return [(UIColor.red, "Tweets"),
+                (UIColor.blue, "Tweets & replies"),
+                (UIColor.yellow, "Media"),
+                (UIColor.orange, "Likes")]
             .map {
                 let vc = storyboard!.instantiateViewController(withIdentifier: "ChildViewController")
                 vc.view.backgroundColor = $0.0
