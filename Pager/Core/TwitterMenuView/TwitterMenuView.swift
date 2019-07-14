@@ -9,10 +9,20 @@
 import UIKit
 
 final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
+    public enum Distribution {
+        case fillEqually
+        case equalSpacing
+    }
+    
+    public var distribution: Distribution = .fillEqually
+    public var insets: UIEdgeInsets = .zero
+    public var itemSpacing: CGFloat = 32
+    public var titleFont: UIFont = UIFont.boldSystemFont(ofSize: 14)
     public var selectedTextColor = UIColor(hex: 0x1DA1F2)
     public var deselectedTextColor = UIColor.darkGray
     public var selectedBarColor = UIColor(hex: 0x1DA1F2)
     public var selectedBarHeight: CGFloat = 2
+    public var selectedBarInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     
     public weak var delegate: MenuProviderDelegate?
     private(set) public var currentIndex: Int = 0
@@ -20,6 +30,7 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     @IBOutlet private weak var collectionView: UICollectionView!
     private var titles: [String] = []
     private var selectedBar = UIView()
+    private var lastContentOffsetX: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,18 +65,18 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
             collectionView.layoutIfNeeded()
         }
         
-//        // Scroll
-//        let totalWidth = collectionView.contentSize.width
-//        let diff = totalWidth - collectionView.bounds.width
-//
-//        if diff > 0 {
-//            let fromValue = diff / CGFloat(titles.count-1)  * CGFloat(fromIndex)
-//            let toValue = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
-//            let value = (toValue - fromValue) * scrollPercentage + fromValue
-//            var offset = collectionView.contentOffset
-//            offset.x = value
-//            collectionView.setContentOffset(offset, animated: false)
-//        }
+        // Scroll diff
+        let totalWidth = collectionView.contentSize.width
+        let diff = totalWidth - collectionView.bounds.width
+
+        if diff > 0 {
+            let fromValue = diff / CGFloat(titles.count-1)  * CGFloat(fromIndex)
+            let toValue = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
+            let value = (toValue - fromValue) * scrollPercentage + fromValue
+            var offset = collectionView.contentOffset
+            offset.x = value
+            collectionView.setContentOffset(offset, animated: false)
+        }
         
         guard let fromAttributes = getAttributes(index: fromIndex),
             let toAttributes = getAttributes(index: toIndex) else { return }
@@ -74,11 +85,11 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         let pointX = (toPoint.x - fromPoint.x) * scrollPercentage + fromPoint.x
         selectedBar.center.x = pointX
         
-//        let inset = selectedViewInsets.left + selectedViewInsets.right
-//        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
-//        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
-//        let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
-//        selectedBar.frame.size.width = width
+        let inset = selectedBarInsets.left + selectedBarInsets.right
+        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+        let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
+        selectedBar.frame.size.width = width
     }
     
     public func sourceViewControllers(_ viewControllers: [UIViewController]) {
@@ -97,16 +108,16 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
         
-//        // Scroll
-//        let totalWidth = collectionView.contentSize.width
-//        let diff = totalWidth - collectionView.bounds.width
-//
-//        if diff > 0 {
-//            let value = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
-//            var offset = collectionView.contentOffset
-//            offset.x = value
-//            collectionView.setContentOffset(offset, animated: true)
-//        }
+        // Scroll diff
+        let totalWidth = collectionView.contentSize.width
+        let diff = totalWidth - collectionView.bounds.width
+
+        if diff > 0 {
+            let value = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
+            var offset = collectionView.contentOffset
+            offset.x = value
+            collectionView.setContentOffset(offset, animated: true)
+        }
         
         guard let fromAttributes = getAttributes(index: fromIndex),
             let toAttributes = getAttributes(index: toIndex) else { return }
@@ -114,32 +125,41 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         let toPoint = collectionView.convert(toAttributes.center, to: self)
         selectedBar.center.x = fromPoint.x
         
-//        let inset = selectedViewInsets.left + selectedViewInsets.right
-//        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
-//        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
-//        selectedView.frame.size.width = fromWidth
-        
+        let inset = selectedBarInsets.left + selectedBarInsets.right
+        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
+        selectedBar.frame.size.width = fromWidth
         
         if !animated {
-//            selectedBar.frame.size.width = toWidth
+            selectedBar.frame.size.width = toWidth
             selectedBar.center.x = toPoint.x
             return
         }
         
-        UIView.animate(withDuration: 0.3) { [weak self] in
-//            self?.selectedBar.frame.size.width = toWidth
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.selectedBar.frame.size.width = toWidth
             self?.selectedBar.center.x = toPoint.x
         }
     }
     
     private func updateSelectedBar() {
+        let inset = selectedBarInsets.left + selectedBarInsets.right
+        let width = titleLabelSize(string: titles[currentIndex]).width + inset
+        selectedBar.frame.size = CGSize(width: width, height: selectedBarHeight)
+        
         guard let attributes = getAttributes(index: currentIndex) else { return }
-        selectedBar.frame.size = CGSize(width: attributes.bounds.width, height: selectedBarHeight)
+        let point = collectionView.convert(attributes.center, to: collectionView)
+        selectedBar.center.x = point.x
         selectedBar.frame.origin.y = collectionView.bounds.height - selectedBar.bounds.height
     }
     
     private func getAttributes(index: Int) -> UICollectionViewLayoutAttributes? {
         return collectionView.layoutAttributesForItem(at: IndexPath(item: index, section: 0))
+    }
+    
+    private func titleLabelSize(string: String) -> CGSize {
+        return NSString(string: string)
+            .size(withAttributes: [NSAttributedString.Key.font: titleFont])
     }
 }
 
@@ -152,18 +172,45 @@ extension TwitterMenuView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(type: TwitterMenuViewCell.self, for: indexPath)
         cell.titleLabel.textColor = currentIndex == indexPath.item ? selectedTextColor : deselectedTextColor
         cell.titleLabel.text = titles[indexPath.item]
+        cell.titleLabel.font = titleFont
         return cell
     }
 }
 
 extension TwitterMenuView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = collectionView.numberOfItems(inSection: 0)
-        return CGSize(width: collectionView.bounds.width / CGFloat(count), height: collectionView.bounds.height)
+        switch distribution {
+        case .fillEqually:
+            let count = collectionView.numberOfItems(inSection: 0)
+            let totalWidth = collectionView.bounds.width - insets.left - insets.right
+            return CGSize(width: totalWidth / CGFloat(count), height: collectionView.bounds.height)
+        case .equalSpacing:
+            let title = titles[indexPath.item]
+            let size = titleLabelSize(string: title)
+            return CGSize(width: size.width, height: collectionView.bounds.height)
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        switch distribution {
+        case .fillEqually:
+            return 0
+        case .equalSpacing:
+            return itemSpacing
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        switch distribution {
+        case .fillEqually:
+            return 0
+        case .equalSpacing:
+            return itemSpacing
+        }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return insets
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -175,5 +222,10 @@ extension TwitterMenuView: UICollectionViewDelegate, UICollectionViewDelegateFlo
         moveTo(fromIndex: fromIndex, toIndex: currentIndex, animated: true)
         
         delegate?.didChangeIndex(menuBarView: self, index: indexPath.item)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        selectedBar.frame.origin.x -= scrollView.contentOffset.x - lastContentOffsetX
+        lastContentOffsetX = scrollView.contentOffset.x
     }
 }

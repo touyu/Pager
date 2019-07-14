@@ -16,6 +16,9 @@ final class TwitterViewController: UIViewController, Pager {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        menuView.insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        menuView.distribution = .equalSpacing
 
         preparePager()
     }
@@ -24,8 +27,11 @@ final class TwitterViewController: UIViewController, Pager {
         return [(UIColor.red, "ツイート"),
                 (UIColor.blue, "ツイートと返信"),
                 (UIColor.yellow, "メディア"),
+                (UIColor.orange, "いいね"),
+                (UIColor.red, "ツイート"),
+                (UIColor.blue, "ツイートと返信"),
+                (UIColor.yellow, "メディア"),
                 (UIColor.orange, "いいね")]
-//                (UIColor.green, "GreenVC")]
             .map {
                 let vc = storyboard!.instantiateViewController(withIdentifier: "ChildViewController")
                 vc.view.backgroundColor = $0.0
