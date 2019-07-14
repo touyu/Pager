@@ -40,5 +40,9 @@ final class ViewController: UIViewController, Pager {
     func menuProvider() -> MenuProvider? {
         return menuView
     }
+    
+    @IBAction func tappedCloseButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 

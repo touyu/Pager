@@ -136,7 +136,6 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         let fromPoint = collectionView.convert(fromAttributes.center, to: self)
         let toPoint = collectionView.convert(toAttributes.center, to: self)
         selectedView.center.x = fromPoint.x
-        print(fromAttributes.frame, toAttributes.frame)
         
         let inset = selectedViewInsets.left + selectedViewInsets.right
         let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset

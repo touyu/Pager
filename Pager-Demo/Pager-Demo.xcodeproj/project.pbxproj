@@ -15,6 +15,7 @@
 		D1704EBD22DA44A30047D156 /* ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EBC22DA44A30047D156 /* ChildViewController.swift */; };
 		D1704EBE22DA45080047D156 /* Pager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1704E9D22DA3FE40047D156 /* Pager.framework */; };
 		D1704EBF22DA45080047D156 /* Pager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D1704E9D22DA3FE40047D156 /* Pager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1704ECA22DB58130047D156 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EC922DB58130047D156 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D1704E9222DA3FCB0047D156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1704E9822DA3FE40047D156 /* Pager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pager.xcodeproj; path = ../Pager.xcodeproj; sourceTree = "<group>"; };
 		D1704EBC22DA44A30047D156 /* ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewController.swift; sourceTree = "<group>"; };
+		D1704EC922DB58130047D156 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				D1704E8622DA3FC90047D156 /* AppDelegate.swift */,
 				D1704E8822DA3FC90047D156 /* ViewController.swift */,
+				D1704EC922DB58130047D156 /* ListViewController.swift */,
 				D1704E8A22DA3FC90047D156 /* Main.storyboard */,
 				D1704EBC22DA44A30047D156 /* ChildViewController.swift */,
 				D1704E8D22DA3FCB0047D156 /* Assets.xcassets */,
@@ -202,6 +205,7 @@
 			files = (
 				D1704E8922DA3FC90047D156 /* ViewController.swift in Sources */,
 				D1704E8722DA3FC90047D156 /* AppDelegate.swift in Sources */,
+				D1704ECA22DB58130047D156 /* ListViewController.swift in Sources */,
 				D1704EBD22DA44A30047D156 /* ChildViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
