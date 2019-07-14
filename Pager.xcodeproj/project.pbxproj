@@ -11,6 +11,7 @@
 		D16F087722DB5C2B00B1F043 /* TwitterMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16F087622DB5C2B00B1F043 /* TwitterMenuView.xib */; };
 		D16F087A22DB5D8800B1F043 /* TwitterMenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F087822DB5D8800B1F043 /* TwitterMenuViewCell.swift */; };
 		D16F087B22DB5D8800B1F043 /* TwitterMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16F087922DB5D8800B1F043 /* TwitterMenuViewCell.xib */; };
+		D16F087D22DB665B00B1F043 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F087C22DB665B00B1F043 /* UIColor.swift */; };
 		D1704E7322DA3D430047D156 /* Pager.h in Headers */ = {isa = PBXBuildFile; fileRef = D1704E7122DA3D430047D156 /* Pager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1704EA122DA40290047D156 /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EA022DA40290047D156 /* Pager.swift */; };
 		D1704EA322DA406B0047D156 /* MenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EA222DA406B0047D156 /* MenuProvider.swift */; };
@@ -32,6 +33,7 @@
 		D16F087622DB5C2B00B1F043 /* TwitterMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterMenuView.xib; sourceTree = "<group>"; };
 		D16F087822DB5D8800B1F043 /* TwitterMenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterMenuViewCell.swift; sourceTree = "<group>"; };
 		D16F087922DB5D8800B1F043 /* TwitterMenuViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterMenuViewCell.xib; sourceTree = "<group>"; };
+		D16F087C22DB665B00B1F043 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D1704E6E22DA3D430047D156 /* Pager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1704E7122DA3D430047D156 /* Pager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pager.h; sourceTree = "<group>"; };
 		D1704E7222DA3D430047D156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				D1704EAD22DA41E20047D156 /* NibLoadable.swift */,
 				D1704EAF22DA42040047D156 /* NSObject.swift */,
 				D1704EB122DA426B0047D156 /* UICollectionView.swift */,
+				D16F087C22DB665B00B1F043 /* UIColor.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1704EB922DA431B0047D156 /* PinterestMenuView.swift in Sources */,
+				D16F087D22DB665B00B1F043 /* UIColor.swift in Sources */,
 				D16F087A22DB5D8800B1F043 /* TwitterMenuViewCell.swift in Sources */,
 				D1704EA122DA40290047D156 /* Pager.swift in Sources */,
 				D1704EA922DA41840047D156 /* ContainerCollectionViewCell.swift in Sources */,

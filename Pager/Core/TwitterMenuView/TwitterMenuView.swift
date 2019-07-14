@@ -9,9 +9,9 @@
 import UIKit
 
 final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
-    public var selectedTextColor = UIColor.blue
+    public var selectedTextColor = UIColor(hex: 0x1DA1F2)
     public var deselectedTextColor = UIColor.darkGray
-    public var selectedBarColor = UIColor.blue
+    public var selectedBarColor = UIColor(hex: 0x1DA1F2)
     public var selectedBarHeight: CGFloat = 2
     
     public weak var delegate: MenuProviderDelegate?
