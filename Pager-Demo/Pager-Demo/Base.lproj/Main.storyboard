@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Pinterest Exampel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rT0-1X-npy">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Pinterest Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rT0-1X-npy">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -39,6 +39,26 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="OSe-ge-FaL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Tff-Rq-ySN" style="IBUITableViewCellStyleDefault" id="nMD-CT-zGI">
+                                        <rect key="frame" x="0.0" y="79" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nMD-CT-zGI" id="Qr2-DQ-c8S">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Twitter Example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tff-Rq-ySN">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="6GM-PY-NNL" kind="show" id="RLp-yO-BLP"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -53,6 +73,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2uR-NB-Eab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-67" y="28"/>
+        </scene>
+        <!--Twitter View Controller-->
+        <scene sceneID="Lbd-qp-haN">
+            <objects>
+                <viewController id="6GM-PY-NNL" customClass="TwitterViewController" customModule="Pager_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gVD-Ic-Zju">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TYm-Q5-fAM" customClass="VCSContainerView" customModule="Pager">
+                                <rect key="frame" x="0.0" y="92" width="414" height="804"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmC-cD-ANP" customClass="TwitterMenuView" customModule="Pager">
+                                <rect key="frame" x="0.0" y="44" width="414" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="qSg-6K-9Xg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arp-Qj-LUh">
+                                <rect key="frame" x="334" y="806" width="60" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Q51-6P-Nii"/>
+                                    <constraint firstAttribute="height" constant="36" id="y94-hH-5uk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedCloseButton:" destination="6GM-PY-NNL" eventType="touchUpInside" id="8Md-MF-uCF"/>
+                                    <action selector="tappedCloseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xov-lm-EWc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TYm-Q5-fAM" firstAttribute="top" secondItem="wmC-cD-ANP" secondAttribute="bottom" id="3rj-6a-CMB"/>
+                            <constraint firstItem="XWj-Jd-TiS" firstAttribute="bottom" secondItem="arp-Qj-LUh" secondAttribute="bottom" constant="20" id="BGX-VA-43j"/>
+                            <constraint firstItem="wmC-cD-ANP" firstAttribute="centerX" secondItem="XWj-Jd-TiS" secondAttribute="centerX" id="HcP-CR-dzB"/>
+                            <constraint firstItem="XWj-Jd-TiS" firstAttribute="trailing" secondItem="arp-Qj-LUh" secondAttribute="trailing" constant="20" id="Lhq-3h-g4k"/>
+                            <constraint firstItem="wmC-cD-ANP" firstAttribute="width" secondItem="gVD-Ic-Zju" secondAttribute="width" id="MCm-mr-5KU"/>
+                            <constraint firstItem="XWj-Jd-TiS" firstAttribute="trailing" secondItem="TYm-Q5-fAM" secondAttribute="trailing" id="Vgj-HD-KQY"/>
+                            <constraint firstItem="TYm-Q5-fAM" firstAttribute="leading" secondItem="XWj-Jd-TiS" secondAttribute="leading" id="ZvN-jR-vaq"/>
+                            <constraint firstAttribute="bottom" secondItem="TYm-Q5-fAM" secondAttribute="bottom" id="gNb-na-a89"/>
+                            <constraint firstItem="wmC-cD-ANP" firstAttribute="top" secondItem="XWj-Jd-TiS" secondAttribute="top" id="jie-Ia-4g5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XWj-Jd-TiS"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="TYm-Q5-fAM" id="1Ik-gB-E8q"/>
+                        <outlet property="menuView" destination="wmC-cD-ANP" id="pl9-MV-EaJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HJR-ZO-cxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="671.01449275362324" y="315.40178571428572"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -74,9 +152,9 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8J-Xk-WGY">
-                                <rect key="frame" x="344" y="806" width="50" height="36"/>
+                                <rect key="frame" x="334" y="806" width="60" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="IRE-VR-vdK"/>
+                                    <constraint firstAttribute="width" constant="60" id="IRE-VR-vdK"/>
                                     <constraint firstAttribute="height" constant="36" id="lpA-GL-M2G"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -109,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="656.52173913043487" y="26.785714285714285"/>
+            <point key="canvasLocation" x="670" y="-360"/>
         </scene>
         <!--Child View Controller-->
         <scene sceneID="Rtx-Bt-1JW">
@@ -124,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icy-de-Zbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1355" y="21"/>
+            <point key="canvasLocation" x="1561" y="27"/>
         </scene>
     </scenes>
 </document>

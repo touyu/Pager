@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D16F087322DB5B3800B1F043 /* TwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F087222DB5B3800B1F043 /* TwitterViewController.swift */; };
 		D1704E8722DA3FC90047D156 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704E8622DA3FC90047D156 /* AppDelegate.swift */; };
 		D1704E8922DA3FC90047D156 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704E8822DA3FC90047D156 /* ViewController.swift */; };
 		D1704E8C22DA3FC90047D156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1704E8A22DA3FC90047D156 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D16F087222DB5B3800B1F043 /* TwitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterViewController.swift; sourceTree = "<group>"; };
 		D1704E8322DA3FC90047D156 /* Pager-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pager-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1704E8622DA3FC90047D156 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1704E8822DA3FC90047D156 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				D1704E8622DA3FC90047D156 /* AppDelegate.swift */,
 				D1704E8822DA3FC90047D156 /* ViewController.swift */,
+				D16F087222DB5B3800B1F043 /* TwitterViewController.swift */,
 				D1704EC922DB58130047D156 /* ListViewController.swift */,
 				D1704E8A22DA3FC90047D156 /* Main.storyboard */,
 				D1704EBC22DA44A30047D156 /* ChildViewController.swift */,
@@ -205,6 +208,7 @@
 			files = (
 				D1704E8922DA3FC90047D156 /* ViewController.swift in Sources */,
 				D1704E8722DA3FC90047D156 /* AppDelegate.swift in Sources */,
+				D16F087322DB5B3800B1F043 /* TwitterViewController.swift in Sources */,
 				D1704ECA22DB58130047D156 /* ListViewController.swift in Sources */,
 				D1704EBD22DA44A30047D156 /* ChildViewController.swift in Sources */,
 			);
