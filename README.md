@@ -1,9 +1,11 @@
 # Pager
-<img src="https://img.shields.io/badge/platforms-iOS-lightgrey.svg">
-<img src="https://img.shields.io/badge/language-Swift%205.0-orange.svg">
-<img src="https://img.shields.io/badge/pod-v0.1.0-blue.svg">
-<img src="https://img.shields.io/badge/license-MIT-blue.svg">
 
+
+![Swift 4.2.1](https://img.shields.io/badge/Swift-5.0-orange.svg)
+<img src="https://img.shields.io/badge/platforms-iOS-lightgrey.svg">
+<img src="https://img.shields.io/badge/pod-v0.1.0-blue.svg">
+<a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+<img src="https://img.shields.io/badge/license-MIT-blue.svg">
 
 |   Pinterest    |      Twitter     |
 |:--------------:|:----------------:|
