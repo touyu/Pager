@@ -38,6 +38,7 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     private(set) public var currentIndex: Int = 0
     private var titles: [String] = []
     private var selectedView = UIView()
+    private var lastContentOffsetX: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,7 +60,9 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
         }
-        collectionView.isScrollEnabled = false
+//        collectionView.isScrollEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(PinterestMenuViewCell.self)
         collectionView.backgroundColor = .clear
         
@@ -76,15 +79,16 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
             collectionView.layoutIfNeeded()
         }
         
-        guard let fromCell = collectionView.cellForItem(at: IndexPath(item: fromIndex, section: 0)) as? PinterestMenuViewCell else { return }
-        guard let toCell = collectionView.cellForItem(at: IndexPath(item: toIndex, section: 0)) as? PinterestMenuViewCell else { return }
-        let fromPoint = fromCell.contentView.convert(fromCell.titleLabel.center, to: collectionView)
-        let toPoint = toCell.contentView.convert(toCell.titleLabel.center, to: collectionView)
+        guard let fromAttributes = getAttributes(index: fromIndex),
+            let toAttributes = getAttributes(index: toIndex) else { return }
+        let fromPoint = collectionView.convert(fromAttributes.center, to: self)
+        let toPoint = collectionView.convert(toAttributes.center, to: self)
         let pointX = (toPoint.x - fromPoint.x) * scrollPercentage + fromPoint.x
         selectedView.center.x = pointX
         
-        let fromWidth = fromCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
-        let toWidth = toCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        let inset = selectedViewInsets.left + selectedViewInsets.right
+        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
         let width = (toWidth - fromWidth) * scrollPercentage + fromWidth
         selectedView.frame.size.width = width
     }
@@ -104,15 +108,29 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
         
-        guard let fromCell = collectionView.cellForItem(at: IndexPath(item: fromIndex, section: 0)) as? PinterestMenuViewCell else { return }
-        guard let toCell = collectionView.cellForItem(at: IndexPath(item: toIndex, section: 0)) as? PinterestMenuViewCell else { return }
-        let fromPoint = fromCell.contentView.convert(fromCell.titleLabel.center, to: collectionView)
-        let toPoint = toCell.contentView.convert(toCell.titleLabel.center, to: collectionView)
-        selectedView.center.x = fromPoint.x
+        // Scroll
+        let totalWidth = collectionView.contentSize.width
+        let diff = totalWidth - collectionView.bounds.width
+
+        if diff > 0 {
+            let value = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
+            var offset = collectionView.contentOffset
+            offset.x = value
+            collectionView.setContentOffset(offset, animated: true)
+        }
         
-        let fromWidth = fromCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
-        let toWidth = toCell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right
+        guard let fromAttributes = getAttributes(index: fromIndex),
+              let toAttributes = getAttributes(index: toIndex) else { return }
+        let fromPoint = collectionView.convert(fromAttributes.center, to: self)
+        let toPoint = collectionView.convert(toAttributes.center, to: self)
+        selectedView.center.x = fromPoint.x
+        print(fromAttributes.frame, toAttributes.frame)
+        
+        let inset = selectedViewInsets.left + selectedViewInsets.right
+        let fromWidth = titleLabelSize(string: titles[fromIndex]).width + inset
+        let toWidth = titleLabelSize(string: titles[toIndex]).width  + inset
         selectedView.frame.size.width = fromWidth
+
         
         if !animated {
             selectedView.frame.size.width = toWidth
@@ -127,12 +145,27 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     }
     
     private func updateSelectedView() {
-        guard let cell = collectionView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? PinterestMenuViewCell else { return }
+        guard let cell = getCell(index: currentIndex) else { return }
         let point = cell.contentView.convert(cell.titleLabel.center, to: collectionView)
         selectedView.frame.size = CGSize(width: cell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right,
                                          height: cell.titleLabel.bounds.height + selectedViewInsets.top + selectedViewInsets.bottom)
         selectedView.center = point
         selectedView.layer.cornerRadius = selectedView.bounds.height / 2
+    }
+    
+    private func getCell(index: Int) -> PinterestMenuViewCell? {
+        return collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? PinterestMenuViewCell
+    }
+    
+    private func getAttributes(index: Int) -> UICollectionViewLayoutAttributes? {
+        return collectionView.layoutAttributesForItem(at: IndexPath(item: index, section: 0))
+    }
+    
+    private func titleLabelSize(string: String) -> CGSize {
+        return NSString(string: string).boundingRect(with: UIView.layoutFittingExpandedSize,
+                                             options: .usesLineFragmentOrigin,
+                                             attributes: [NSAttributedString.Key.font: titleFont],
+                                             context: nil).size
     }
 }
 
@@ -193,5 +226,10 @@ extension PinterestMenuView: UICollectionViewDelegate, UICollectionViewDelegateF
         moveTo(fromIndex: fromIndex, toIndex: currentIndex, animated: true)
         
         delegate?.didChangeIndex(menuBarView: self, index: indexPath.item)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        selectedView.frame.origin.x -= scrollView.contentOffset.x - lastContentOffsetX
+        lastContentOffsetX = scrollView.contentOffset.x
     }
 }

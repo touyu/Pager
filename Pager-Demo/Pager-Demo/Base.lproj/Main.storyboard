@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrM-uQ-z2X" customClass="VCSContainerView" customModule="Pager">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZE-4E-Wjc" customClass="PinterestMenuView" customModule="Pager">
@@ -38,7 +38,7 @@
                             <constraint firstItem="iZE-4E-Wjc" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="mvX-sc-bYU"/>
                             <constraint firstItem="iZE-4E-Wjc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pnR-PW-0Cg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zrM-uQ-z2X" secondAttribute="trailing" id="wAO-yv-s9Q"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zrM-uQ-z2X" secondAttribute="bottom" id="wDN-VH-no4"/>
+                            <constraint firstAttribute="bottom" secondItem="zrM-uQ-z2X" secondAttribute="bottom" id="wDN-VH-no4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
