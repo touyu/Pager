@@ -109,6 +109,7 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         titles = viewControllers
             .compactMap { $0 as? MenuTitleProvider }
             .map { $0.menuTitle }
+        
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
         

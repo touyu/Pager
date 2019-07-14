@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D16F087522DB5C1800B1F043 /* TwitterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F087422DB5C1800B1F043 /* TwitterMenuView.swift */; };
+		D16F087722DB5C2B00B1F043 /* TwitterMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16F087622DB5C2B00B1F043 /* TwitterMenuView.xib */; };
+		D16F087A22DB5D8800B1F043 /* TwitterMenuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F087822DB5D8800B1F043 /* TwitterMenuViewCell.swift */; };
+		D16F087B22DB5D8800B1F043 /* TwitterMenuViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16F087922DB5D8800B1F043 /* TwitterMenuViewCell.xib */; };
 		D1704E7322DA3D430047D156 /* Pager.h in Headers */ = {isa = PBXBuildFile; fileRef = D1704E7122DA3D430047D156 /* Pager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1704EA122DA40290047D156 /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EA022DA40290047D156 /* Pager.swift */; };
 		D1704EA322DA406B0047D156 /* MenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EA222DA406B0047D156 /* MenuProvider.swift */; };
@@ -24,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D16F087422DB5C1800B1F043 /* TwitterMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterMenuView.swift; sourceTree = "<group>"; };
+		D16F087622DB5C2B00B1F043 /* TwitterMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterMenuView.xib; sourceTree = "<group>"; };
+		D16F087822DB5D8800B1F043 /* TwitterMenuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterMenuViewCell.swift; sourceTree = "<group>"; };
+		D16F087922DB5D8800B1F043 /* TwitterMenuViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterMenuViewCell.xib; sourceTree = "<group>"; };
 		D1704E6E22DA3D430047D156 /* Pager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1704E7122DA3D430047D156 /* Pager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pager.h; sourceTree = "<group>"; };
 		D1704E7222DA3D430047D156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +61,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D16F087122DB5AF300B1F043 /* TwitterMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				D16F087422DB5C1800B1F043 /* TwitterMenuView.swift */,
+				D16F087622DB5C2B00B1F043 /* TwitterMenuView.xib */,
+				D16F087822DB5D8800B1F043 /* TwitterMenuViewCell.swift */,
+				D16F087922DB5D8800B1F043 /* TwitterMenuViewCell.xib */,
+			);
+			path = TwitterMenuView;
+			sourceTree = "<group>";
+		};
 		D1704E6422DA3D430047D156 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +112,7 @@
 		D1704E9F22DA40050047D156 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D16F087122DB5AF300B1F043 /* TwitterMenuView */,
 				D1704EB322DA431B0047D156 /* PinterestMenuView */,
 				D1704EA422DA41440047D156 /* ContainerView */,
 				D1704EA022DA40290047D156 /* Pager.swift */,
@@ -192,10 +212,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16F087722DB5C2B00B1F043 /* TwitterMenuView.xib in Resources */,
 				D1704EBA22DA431B0047D156 /* PinterestMenuView.xib in Resources */,
 				D1704EAA22DA41840047D156 /* ContainerCollectionViewCell.xib in Resources */,
 				D1704EAC22DA41840047D156 /* VCSContainerView.xib in Resources */,
 				D1704EB822DA431B0047D156 /* PinterestMenuViewCell.xib in Resources */,
+				D16F087B22DB5D8800B1F043 /* TwitterMenuViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,8 +229,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1704EB922DA431B0047D156 /* PinterestMenuView.swift in Sources */,
+				D16F087A22DB5D8800B1F043 /* TwitterMenuViewCell.swift in Sources */,
 				D1704EA122DA40290047D156 /* Pager.swift in Sources */,
 				D1704EA922DA41840047D156 /* ContainerCollectionViewCell.swift in Sources */,
+				D16F087522DB5C1800B1F043 /* TwitterMenuView.swift in Sources */,
 				D1704EB222DA426B0047D156 /* UICollectionView.swift in Sources */,
 				D1704EA322DA406B0047D156 /* MenuProvider.swift in Sources */,
 				D1704EB022DA42040047D156 /* NSObject.swift in Sources */,
