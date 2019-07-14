@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name         = "Pager"
+  spec.name         = "Pager-iOS"
   spec.version      = "0.0.1"
   spec.summary      = "Elegant pager library for iOS"
   spec.homepage     = "https://github.com/touyu/Pager"
