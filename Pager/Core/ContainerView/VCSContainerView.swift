@@ -13,13 +13,13 @@ protocol VCSContainerViewDelegate: class {
 }
 
 final public class VCSContainerView: UIView, NibOwnerLoadable {
+    private(set) public var currentIndex: Int = 0
+    
     @IBOutlet private weak var collectionView: UICollectionView!
     
     weak var parentViewController: UIViewController!
     weak var delegate: VCSContainerViewDelegate?
     var viewControllers: [UIViewController] = []
-    
-    var currentIndex: Int = 0
     
     enum SwipeDirection {
         case left

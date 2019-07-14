@@ -13,10 +13,17 @@ public protocol MenuTitleProvider: class {
 }
 
 final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
+    public enum Distribution {
+        case fillEqually
+        case equalSpacing
+    }
+    
     public weak var delegate: MenuProviderDelegate?
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    public var distribution: Distribution = .fillEqually
+    public var itemSpacing: CGFloat = 32
     public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     public var selectedTextColor = UIColor.black
     public var deselectedTextColor = UIColor.lightGray
@@ -145,13 +152,32 @@ extension PinterestMenuView: UICollectionViewDataSource {
 
 extension PinterestMenuView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfItems = collectionView.numberOfItems(inSection: 0)
-        let totalWidth = collectionView.bounds.width - insets.left - insets.right
-        return CGSize(width: totalWidth / CGFloat(numberOfItems), height: collectionView.bounds.height)
+        switch distribution {
+        case .fillEqually:
+            let numberOfItems = collectionView.numberOfItems(inSection: 0)
+            let totalWidth = collectionView.bounds.width - insets.left - insets.right
+            return CGSize(width: totalWidth / CGFloat(numberOfItems), height: collectionView.bounds.height)
+        case .equalSpacing:
+            let title = titles[indexPath.item]
+            let rect = NSString(string: title).boundingRect(with: UIView.layoutFittingExpandedSize,
+                                                            options: .usesLineFragmentOrigin,
+                                                            attributes: [NSAttributedString.Key.font: titleFont],
+                                                            context: nil)
+            return CGSize(width: rect.width, height: collectionView.bounds.height)
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        switch distribution {
+        case .fillEqually:
+            return 0
+        case .equalSpacing:
+            return itemSpacing
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
