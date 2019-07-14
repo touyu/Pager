@@ -24,10 +24,10 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     
     public var distribution: Distribution = .fillEqually
     public var itemSpacing: CGFloat = 32
-    public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     public var selectedTextColor = UIColor.black
     public var deselectedTextColor = UIColor.lightGray
-    public var titleFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+    public var titleFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .bold)
     public var selectedViewInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
     public var selectedViewColor = UIColor(white: 0.9, alpha: 1) {
         didSet {
@@ -213,7 +213,12 @@ extension PinterestMenuView: UICollectionViewDelegate, UICollectionViewDelegateF
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        switch distribution {
+        case .fillEqually:
+            return 0
+        case .equalSpacing:
+            return itemSpacing
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
