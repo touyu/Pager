@@ -75,8 +75,7 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
     public func moveTo(fromIndex: Int, toIndex: Int, scrollPercentage: CGFloat, indexWasChanged: Bool) {
         if indexWasChanged {
             currentIndex = toIndex
-            collectionView.reloadData()
-            collectionView.layoutIfNeeded()
+            updateCellsLayout()
         }
         
         // Scroll diff
@@ -129,26 +128,30 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
             .compactMap { $0 as? MenuTitleProvider }
             .map { $0.menuTitle }
         
+        updateLayout()
+    }
+    
+    public func updateLayout() {
         switch alignment {
         case .left:
             break
         case .center:
             itemSpacing = 0
+            insets = .zero
             
-            collectionView.reloadData()
-            collectionView.layoutIfNeeded()
+            updateCellsLayout()
             let spacing = (collectionView.bounds.width - collectionView.contentSize.width) / CGFloat(titles.count)
             itemSpacing = spacing
-            insets = UIEdgeInsets(top: 0, left: insets.left + spacing / 2, bottom: 0, right: insets.right + spacing / 2)
+            insets = UIEdgeInsets(top: 0, left: spacing / 2, bottom: 0, right: spacing / 2)
         }
         
-        updateSelectedBar()
+        updateCellsLayout()
+        updateSelectedBarLayout()
     }
     
     private func moveTo(fromIndex: Int, toIndex: Int, animated: Bool) {
         currentIndex = toIndex
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
+        updateCellsLayout()
         
         // Scroll diff
         let totalWidth = collectionView.contentSize.width
@@ -206,10 +209,12 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         }
     }
     
-    private func updateSelectedBar() {
+    private func updateCellsLayout() {
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
-        
+    }
+    
+    private func updateSelectedBarLayout() {
         switch selectedBarWidthMode {
         case .automatic:
             switch alignment {
@@ -299,8 +304,7 @@ extension TwitterMenuView: UICollectionViewDelegate, UICollectionViewDelegateFlo
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let fromIndex = currentIndex
         currentIndex = indexPath.item
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
+        updateCellsLayout()
         
         moveTo(fromIndex: fromIndex, toIndex: currentIndex, animated: true)
         
