@@ -19,7 +19,6 @@ final class TwitterViewController: UIViewController, Pager {
         
         menuView.distribution = .equalSpacing
         menuView.alignment = .center
-        menuView.selectedBarWidthMode = .automatic
 
         preparePager()
     }
