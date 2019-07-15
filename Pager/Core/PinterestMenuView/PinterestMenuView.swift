@@ -18,17 +18,23 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         case equalSpacing
     }
     
+    public enum Alignment {
+        case left
+        case center
+    }
+    
     public weak var delegate: MenuProviderDelegate?
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
     public var distribution: Distribution = .fillEqually
+    public var alignment: Alignment = .left
     public var itemSpacing: CGFloat = 32
     public var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     public var selectedTextColor = UIColor.black
     public var deselectedTextColor = UIColor.lightGray
-    public var titleFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .bold)
-    public var selectedViewInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+    public var titleFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .bold)
+    public var selectedViewInsets = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
     public var selectedViewColor = UIColor(white: 0.9, alpha: 1) {
         didSet {
             selectedView.backgroundColor = selectedViewColor
@@ -110,8 +116,18 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
             .compactMap { $0 as? MenuTitleProvider }
             .map { $0.menuTitle }
         
-        collectionView.reloadData()
-        collectionView.layoutIfNeeded()
+        switch alignment {
+        case .left:
+            break
+        case .center:
+            itemSpacing = 0
+            
+            collectionView.reloadData()
+            collectionView.layoutIfNeeded()
+            let spacing = (collectionView.bounds.width - collectionView.contentSize.width) / CGFloat(titles.count)
+            itemSpacing = spacing
+            insets = UIEdgeInsets(top: 0, left: insets.left + spacing / 2, bottom: 0, right: insets.right + spacing / 2)
+        }
         
         updateSelectedView()
     }
@@ -157,6 +173,9 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
     }
     
     private func updateSelectedView() {
+        collectionView.reloadData()
+        collectionView.layoutIfNeeded()
+        
         guard let cell = getCell(index: currentIndex) else { return }
         let point = cell.contentView.convert(cell.titleLabel.center, to: collectionView)
         selectedView.frame.size = CGSize(width: cell.titleLabel.bounds.width + selectedViewInsets.left + selectedViewInsets.right,

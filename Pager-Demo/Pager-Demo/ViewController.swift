@@ -16,8 +16,10 @@ final class ViewController: UIViewController, Pager {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuView.selectedViewInsets = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
-        menuView.titleFont = UIFont.systemFont(ofSize: 14, weight: .bold)
+        menuView.insets = UIEdgeInsets(top: 0,
+                                       left: menuView.selectedViewInsets.left + 16,
+                                       bottom: 0,
+                                       right: menuView.selectedViewInsets.left + 16)
         menuView.distribution = .equalSpacing
         
         preparePager()

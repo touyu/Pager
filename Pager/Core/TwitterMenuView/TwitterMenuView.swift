@@ -134,13 +134,12 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
             break
         case .center:
             itemSpacing = 0
-            insets = .zero
             
             collectionView.reloadData()
             collectionView.layoutIfNeeded()
             let spacing = (collectionView.bounds.width - collectionView.contentSize.width) / CGFloat(titles.count)
             itemSpacing = spacing
-            insets = UIEdgeInsets(top: 0, left: spacing / 2, bottom: 0, right: spacing / 2)
+            insets = UIEdgeInsets(top: 0, left: insets.left + spacing / 2, bottom: 0, right: insets.right + spacing / 2)
         }
         
         updateSelectedBar()
