@@ -21,6 +21,7 @@ public protocol PagerDataSource {
 
 public protocol Pager: class, PagerDataSource {
     var containerView: VCSContainerView! { get }
+    var viewControllers: [UIViewController] { get }
 }
 
 public typealias PagerViewController = Pager & UIViewController
@@ -32,6 +33,11 @@ public extension Pager {
 }
 
 extension Pager where Self: UIViewController {
+    public var viewControllers: [UIViewController] {
+        get { return objc_getAssociatedObject(self, &AssociatedKeys.childViewControllers) as? [UIViewController] ?? [] }
+        set { objc_setAssociatedObject(self, &AssociatedKeys.childViewControllers, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+    
     var containerViewDelegateManager: VCSContainerViewDelegateManager? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.containerViewDelegateManager) as? VCSContainerViewDelegateManager }
         set { objc_setAssociatedObject(self, &AssociatedKeys.containerViewDelegateManager, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
@@ -40,11 +46,6 @@ extension Pager where Self: UIViewController {
     var menuViewDelegateManager: MenuViewDelegateManager? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.menuViewDelegateManager) as? MenuViewDelegateManager }
         set { objc_setAssociatedObject(self, &AssociatedKeys.menuViewDelegateManager, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-    }
-    
-    var viewControllers: [UIViewController] {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.childViewControllers) as? [UIViewController] ?? [] }
-        set { objc_setAssociatedObject(self, &AssociatedKeys.childViewControllers, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
     public func preparePager() {
