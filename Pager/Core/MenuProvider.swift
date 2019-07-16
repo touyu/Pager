@@ -21,6 +21,7 @@ public extension MenuProviderDelegate {
 public protocol MenuProvider: class {
     var delegate: MenuProviderDelegate? { get set }
     var currentIndex: Int { get }
+    func moveTo(fromIndex: Int, toIndex: Int, animated: Bool)
     func moveTo(fromIndex: Int, toIndex: Int, scrollPercentage: CGFloat, indexWasChanged: Bool)
     func sourceViewControllers(_ viewControllers: [UIViewController])
 }

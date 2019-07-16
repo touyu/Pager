@@ -132,7 +132,7 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
         updateSelectedView()
     }
     
-    private func moveTo(fromIndex: Int, toIndex: Int, animated: Bool) {
+    public func moveTo(fromIndex: Int, toIndex: Int, animated: Bool) {
         currentIndex = toIndex
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
@@ -145,7 +145,7 @@ final public class PinterestMenuView: UIView, NibOwnerLoadable, MenuProvider {
             let value = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
             var offset = collectionView.contentOffset
             offset.x = value
-            collectionView.setContentOffset(offset, animated: true)
+            collectionView.setContentOffset(offset, animated: animated)
         }
         
         guard let fromAttributes = getAttributes(index: fromIndex),

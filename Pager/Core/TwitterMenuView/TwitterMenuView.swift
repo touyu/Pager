@@ -149,7 +149,7 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
         updateSelectedBarLayout()
     }
     
-    private func moveTo(fromIndex: Int, toIndex: Int, animated: Bool) {
+    public func moveTo(fromIndex: Int, toIndex: Int, animated: Bool) {
         currentIndex = toIndex
         updateCellsLayout()
         
@@ -161,7 +161,7 @@ final public class TwitterMenuView: UIView, NibOwnerLoadable, MenuProvider {
             let value = diff / CGFloat(titles.count-1)  * CGFloat(toIndex)
             var offset = collectionView.contentOffset
             offset.x = value
-            collectionView.setContentOffset(offset, animated: true)
+            collectionView.setContentOffset(offset, animated: animated)
         }
         
         guard let fromAttributes = getAttributes(index: fromIndex),

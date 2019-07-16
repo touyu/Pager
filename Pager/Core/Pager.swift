@@ -37,6 +37,10 @@ extension Pager where Self: UIViewController {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.childViewControllers) as? [UIViewController] ?? [] }
         set { objc_setAssociatedObject(self, &AssociatedKeys.childViewControllers, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
+
+    public var currentIndex: Int {
+        return containerView.currentIndex
+    }
     
     var containerViewDelegateManager: VCSContainerViewDelegateManager? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.containerViewDelegateManager) as? VCSContainerViewDelegateManager }
@@ -59,6 +63,11 @@ extension Pager where Self: UIViewController {
         
         menuProvider()?.delegate = menuViewDelegateManager
         menuProvider()?.sourceViewControllers(viewControllers)
+    }
+
+    public func moveTo(index: Int, animated: Bool) {
+        menuProvider()?.moveTo(fromIndex: currentIndex, toIndex: index, animated: animated)
+        containerView.moveTo(index: index, animated: animated)
     }
 }
 

@@ -82,6 +82,9 @@ final public class VCSContainerView: UIView, NibOwnerLoadable {
         }
         programmaticallyScrolling = true
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: animated)
+        if !animated {
+            programmaticallyScrolling = false
+        }
     }
 }
 
