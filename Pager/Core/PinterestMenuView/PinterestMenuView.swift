@@ -210,6 +210,7 @@ extension PinterestMenuView: UICollectionViewDataSource {
         cell.configure(title: titles[indexPath.item])
         cell.titleLabel.textColor = currentIndex == indexPath.item ? selectedTextColor : deselectedTextColor
         cell.titleLabel.font = titleFont
+        cell.accessibilityIdentifier = "PinterestMenuViewCell_\(indexPath.item)"
         return cell
     }
 }

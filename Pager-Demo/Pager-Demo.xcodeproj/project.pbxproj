@@ -17,6 +17,7 @@
 		D1704EBE22DA45080047D156 /* Pager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1704E9D22DA3FE40047D156 /* Pager.framework */; };
 		D1704EBF22DA45080047D156 /* Pager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D1704E9D22DA3FE40047D156 /* Pager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D1704ECA22DB58130047D156 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1704EC922DB58130047D156 /* ListViewController.swift */; };
+		D1C522D522DD8C02004AAC3B /* Pager_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C522D422DD8C02004AAC3B /* Pager_DemoUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D1704E6D22DA3D430047D156;
 			remoteInfo = Pager;
+		};
+		D1C522D722DD8C02004AAC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1704E7B22DA3FC90047D156 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D1704E8222DA3FC90047D156;
+			remoteInfo = "Pager-Demo";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -62,6 +70,9 @@
 		D1704E9822DA3FE40047D156 /* Pager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pager.xcodeproj; path = ../Pager.xcodeproj; sourceTree = "<group>"; };
 		D1704EBC22DA44A30047D156 /* ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewController.swift; sourceTree = "<group>"; };
 		D1704EC922DB58130047D156 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		D1C522D222DD8C02004AAC3B /* Pager-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pager-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1C522D422DD8C02004AAC3B /* Pager_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pager_DemoUITests.swift; sourceTree = "<group>"; };
+		D1C522D622DD8C02004AAC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +84,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1C522CF22DD8C02004AAC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,6 +99,7 @@
 			children = (
 				D1704E9822DA3FE40047D156 /* Pager.xcodeproj */,
 				D1704E8522DA3FC90047D156 /* Pager-Demo */,
+				D1C522D322DD8C02004AAC3B /* Pager-DemoUITests */,
 				D1704E8422DA3FC90047D156 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				D1704E8322DA3FC90047D156 /* Pager-Demo.app */,
+				D1C522D222DD8C02004AAC3B /* Pager-DemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +137,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D1C522D322DD8C02004AAC3B /* Pager-DemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D1C522D422DD8C02004AAC3B /* Pager_DemoUITests.swift */,
+				D1C522D622DD8C02004AAC3B /* Info.plist */,
+			);
+			path = "Pager-DemoUITests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +168,24 @@
 			productReference = D1704E8322DA3FC90047D156 /* Pager-Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D1C522D122DD8C02004AAC3B /* Pager-DemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1C522DB22DD8C02004AAC3B /* Build configuration list for PBXNativeTarget "Pager-DemoUITests" */;
+			buildPhases = (
+				D1C522CE22DD8C02004AAC3B /* Sources */,
+				D1C522CF22DD8C02004AAC3B /* Frameworks */,
+				D1C522D022DD8C02004AAC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D1C522D822DD8C02004AAC3B /* PBXTargetDependency */,
+			);
+			name = "Pager-DemoUITests";
+			productName = "Pager-DemoUITests";
+			productReference = D1C522D222DD8C02004AAC3B /* Pager-DemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -151,6 +198,10 @@
 				TargetAttributes = {
 					D1704E8222DA3FC90047D156 = {
 						CreatedOnToolsVersion = 10.2;
+					};
+					D1C522D122DD8C02004AAC3B = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = D1704E8222DA3FC90047D156;
 					};
 				};
 			};
@@ -174,6 +225,7 @@
 			projectRoot = "";
 			targets = (
 				D1704E8222DA3FC90047D156 /* Pager-Demo */,
+				D1C522D122DD8C02004AAC3B /* Pager-DemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +251,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1C522D022DD8C02004AAC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -214,6 +273,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1C522CE22DD8C02004AAC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C522D522DD8C02004AAC3B /* Pager_DemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -221,6 +288,11 @@
 			isa = PBXTargetDependency;
 			name = Pager;
 			targetProxy = D1704EC022DA45080047D156 /* PBXContainerItemProxy */;
+		};
+		D1C522D822DD8C02004AAC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D1704E8222DA3FC90047D156 /* Pager-Demo */;
+			targetProxy = D1C522D722DD8C02004AAC3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -400,6 +472,44 @@
 			};
 			name = Release;
 		};
+		D1C522D922DD8C02004AAC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V8AZ23YEL4;
+				INFOPLIST_FILE = "Pager-DemoUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YutoAkiba.Pager-DemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pager-Demo";
+			};
+			name = Debug;
+		};
+		D1C522DA22DD8C02004AAC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V8AZ23YEL4;
+				INFOPLIST_FILE = "Pager-DemoUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.YutoAkiba.Pager-DemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Pager-Demo";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -417,6 +527,15 @@
 			buildConfigurations = (
 				D1704E9622DA3FCB0047D156 /* Debug */,
 				D1704E9722DA3FCB0047D156 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1C522DB22DD8C02004AAC3B /* Build configuration list for PBXNativeTarget "Pager-DemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1C522D922DD8C02004AAC3B /* Debug */,
+				D1C522DA22DD8C02004AAC3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

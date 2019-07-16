@@ -19,7 +19,17 @@ public protocol PagerDataSource {
     func menuProvider() -> MenuProvider?
 }
 
-public protocol Pager: class, PagerDataSource {
+public protocol PagerDelegate {
+    func pager(_ pager: Pager, index didChangedIndex: Int)
+}
+
+public extension PagerDelegate {
+    func pager(_ pager: Pager, index didChangedIndex: Int) {
+
+    }
+}
+
+public protocol Pager: class, PagerDataSource, PagerDelegate {
     var containerView: VCSContainerView! { get }
     var viewControllers: [UIViewController] { get }
 }
@@ -80,6 +90,9 @@ final class VCSContainerViewDelegateManager: NSObject, VCSContainerViewDelegate 
     
     func moveTo(fromIndex: Int, toIndex: Int, scrollPercentage: CGFloat, indexWasChanged: Bool) {
         pager.menuProvider()?.moveTo(fromIndex: fromIndex, toIndex: toIndex, scrollPercentage: scrollPercentage, indexWasChanged: indexWasChanged)
+        if indexWasChanged {
+            pager.pager(pager, index: toIndex)
+        }
     }
 }
 
@@ -92,6 +105,7 @@ final class MenuViewDelegateManager: NSObject, MenuProviderDelegate {
     
     func didChangeIndex(menuBarView: MenuProvider, index: Int) {
         pager.containerView.moveTo(index: index, animated: true)
+        pager.pager(pager, index: index)
     }
 }
 
