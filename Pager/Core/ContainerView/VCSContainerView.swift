@@ -9,6 +9,7 @@
 import UIKit
 
 protocol VCSContainerViewDelegate: class {
+    func willMoveTo(toIndex: Int)
     func moveTo(fromIndex: Int, toIndex: Int, scrollPercentage: CGFloat, indexWasChanged: Bool)
 }
 
@@ -104,6 +105,8 @@ extension VCSContainerView: UICollectionViewDataSource {
         childVC.view.frame = cell.contentView.bounds
         cell.contentView.addSubview(childVC.view)
         parentViewController.addChild(childVC)
+        
+        delegate?.willMoveTo(toIndex: indexPath.item)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
