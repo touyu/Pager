@@ -83,12 +83,18 @@ final public class VCSContainerView: UIView, NibOwnerLoadable {
         }
         programmaticallyScrolling = true
         currentIndex = index
-        collectionView.layoutIfNeeded()
-        collectionView.reloadData()
+
+        layoutIfNeeded()
+
         collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: animated)
         if !animated {
             programmaticallyScrolling = false
         }
+    }
+
+    public func invalidateLayout() {
+        layoutIfNeeded()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
